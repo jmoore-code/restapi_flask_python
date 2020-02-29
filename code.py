@@ -437,10 +437,144 @@
 
 
 
-# Video 41 Type Hinting
+# Video 44 - errors
 
-class Book:
-    def __init__(self, name: str, page_count: int):
-        self.name = name
-        self.page_count = page_count
-    
+# def divide(dividend, divisor):
+#     if divisor == 0:
+#         raise ZeroDivisionError("Divisor cannot be 0.")
+#     return dividend / divisor
+
+
+# students = [
+#     {"name": "Bob", "grades": [75,90]},
+#     {"name": "Rolf", "grades": []},
+#     {"name": "Jen", "grades": [100, 90]}
+# ]
+
+# print("Welcome to average grade program.")
+# try:
+#     for student in students:
+#         name = student["name"]
+#         grades = student["grades"]
+#         average = divide(sum(grades), len(grades))
+#         print(f"{name} averaged {average}.")
+# except ZeroDivisionError as e:
+#     print(f"ERROR: {name} has no grades!")
+# else:
+#     print("-- All students averages calculated --")
+# finally:
+#     print(" -- End of student average calculation")
+
+
+# video 46 first class functions
+# def divide(dividend, divisor):
+#     if divisor == 0:
+#         raise ZeroDivisionError("Divisor cannot be 0.")
+#     return dividend / divisor
+
+# def calculate(*values, operator):
+#     return operator(*values)
+
+# result = calculate(20, 4, operator=divide)
+# print(result)
+
+# video 47 simple decorators 
+
+# user = {"username": "jose", "access_level": "guest"}
+
+# def get_admin_password():
+#     return "1234"
+
+# def make_secure(func):
+#     def secure_function():
+#         if user["access_level"] == "admin":
+#             return func()
+#         else:
+#             return f"No admin permissions for {user['username']}."
+#     return secure_function
+
+# get_admin_password = make_secure(get_admin_password)
+
+# print(get_admin_password())
+
+
+
+#video 48 "at" syntax for decoractors
+
+# import functools
+
+# user = {"username": "jose", "access_level": "guest"}
+
+# def make_secure(func):
+#     @functools.wraps(func)
+#     def secure_function():
+#         if user["access_level"] == "admin":
+#             return func()
+#         else:
+#             return f"No admin permissions for {user['username']}."
+#     return secure_function
+
+# @make_secure
+# def get_admin_password():
+#     return "1234"    
+
+
+# print(get_admin_password())
+
+
+
+
+#video 49 decorating functions with parameters
+
+# import functools
+
+# user = {"username": "jose", "access_level": "guest"}
+
+# def make_secure(func):
+#     @functools.wraps(func)
+#     def secure_function(*args, **kwargs): ## by using *args, and *kwargs we can make this decoractors take any amount of paramters we want
+#         if user["access_level"] == "admin":
+#             return func()
+#         else:
+#             return f"No admin permissions for {user['username']}."
+#     return secure_function
+
+# @make_secure
+# def get_admin_password(panel):
+#     if panel == "admin":
+#         return "1234"
+#     elif panel == "billing":
+#         return "super_secure_password"        
+
+
+# print(get_admin_password("billing"))
+
+
+
+# video 50 decorators with parameters
+
+# import functools
+
+# user = {"username": "jose", "access_level": "guest"}
+
+# def make_secure(access_level):
+#     def decoractor(func):
+#         @functools.wraps(func)
+#         def secure_function(*args, **kwargs): 
+#             if user["access_level"] == "admin":
+#                 return func()
+#             else:
+#                 return f"No admin permissions for {user['username']}."
+#         return secure_function
+#     return decoractor
+
+# @make_secure("admin")
+# def get_admin_password(panel):
+#     return "1234"
+
+# @make_secure("guest")
+# def get_dashboard_password():
+#     return "user: user_password"   
+
+
+# print(get_admin_password("billing"))
