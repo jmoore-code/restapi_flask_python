@@ -4,7 +4,7 @@ users = [
    User(1, "bob", "asdf")
 ]
 
-username_mapping = { u.username: u for u in users}
+username_mapping = { u.username: u for u in users} #this is an object with a list comprehension inside of it, that produces a key with the username and the full object at the value
 userid_mapping = { u.id: u for u in users}
 
 
